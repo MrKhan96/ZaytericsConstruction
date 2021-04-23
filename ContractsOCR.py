@@ -8,8 +8,8 @@ import time
 import itertools
 import json
 import os
+# import pdfplumber
 import datetime
-import cv2
 import boto3
 import pandas as pd
 import multiprocessing as mp
@@ -156,6 +156,8 @@ def ocrDoc(nameX):
     print(datetime.datetime.now())
     start = time.time()
     try:
+        # pdf=pdfplumber.open('uploads/{}'.format(nameX))
+        # imgs=[page.to_image() for page in pdf.pages]
         images = convert_from_path('uploads/{}'.format(nameX))
         print(time.time()-start)
 
@@ -202,7 +204,7 @@ def ocrDoc(nameX):
 
         with open("JSON_Results/{}.json".format(nameX), "w") as ads:
             ads.write(json.dumps(final_results))
-        return final_results
+        return str(final_results)
     except Exception as ex:
         print(time.time()-start)
         print(ex)

@@ -32,12 +32,11 @@ def upload_file():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         resp = jsonify(
-            {'message': 'File successfully uploaded :{}'.format(filename)})
-        resp.status_code = 201
+            {'message': 'File successfully uploaded :{}'.format(filename),'results':'{}'.format(ocrDoc(filename))})
+        # j=ocrDoc(filename)
         return resp
     else:
-        resp = jsonify({'message': 'Allowed file type is pdf',
-                        'result': str(ocrDoc(filename))})
+        resp = jsonify({'message': 'Allowed file type is pdf'})
         resp.status_code = 400
         return resp
 
